@@ -1,6 +1,10 @@
 import setuptools
+import os
 
-with open("README.md", "r") as fh:
+current_dir = os.path.dirname(os.path.dirname(__file__))
+readme_path = os.path.join(current_dir,'README.md')
+
+with open(readme_path, "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 __version__ ='0.0.0'
@@ -24,6 +28,5 @@ setuptools.setup(
     },
     package_dir={'': 'src'},
     packages = setuptools.find_packages(where='src')
-
 )
 

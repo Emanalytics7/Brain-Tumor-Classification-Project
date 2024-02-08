@@ -1,0 +1,7 @@
+artifacts_root: artifacts
+# In order to avoid the path problems
+data_ingestion:
+    root_dir: artifacts/data_ingestion
+    source_url: https://github.com/Emanalytics7/Data-Storage/raw/main/data.zip
+    local_data_file: artifacts/data_ingestion/data.zip
+    unzip_dir: artifacts/data_ingestion
