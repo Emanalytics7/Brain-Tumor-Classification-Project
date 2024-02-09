@@ -1,5 +1,5 @@
 # Pipeline
-from src.braintumorClassifier.config.configuration import ConfigurationManager
+from src.braintumorClassifier.config.configuration import ConfigurationManager1
 from src.braintumorClassifier.components.data_ingestion import DataIngestion
 from src.braintumorClassifier import logger
 
@@ -10,7 +10,7 @@ class DataIngestionTrainingPipeline:
         pass
 
     def main(self):
-        config = ConfigurationManager()
+        config = ConfigurationManager1()
         data_ingestion_config = config.get_data_ingestion_config()
         data_ingestion = DataIngestion(config = data_ingestion_config)
         data_ingestion.download_file()

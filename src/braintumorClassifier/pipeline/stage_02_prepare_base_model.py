@@ -1,5 +1,5 @@
-from src.braintumorClassifier.config.configuration import ConfigurationManager
-from src.braintumorClassifier.components.data_ingestion import PrepareBaseModel
+from src.braintumorClassifier.config.configuration import ConfigurationManager2
+from src.braintumorClassifier.components.prepare_base_model import PrepareBaseModel
 from src.braintumorClassifier import logger
 
 STAGE_NAME = 'Prepare base model'
@@ -9,7 +9,7 @@ class PrepareBaseModelTrainingPipeline:
         pass
     
     def main(self):
-        config = ConfigurationManager()
+        config = ConfigurationManager2()
         prepare_base_model_config = config.get_prepare_base_model_config()
         prepare_base_model = PrepareBaseModel(config=prepare_base_model_config)
         prepare_base_model.get_base_model()

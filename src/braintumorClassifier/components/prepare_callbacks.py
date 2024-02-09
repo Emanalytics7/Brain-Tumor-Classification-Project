@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 
-class PrepareCallback:
+class PrepareCallback1:
     def __init__(self, config: PrepareCallbacksConfig):
         self.config = config
 
