@@ -1,4 +1,4 @@
-from src.braintumorClassifier.config.configuration import ConfigurationManager3
+from src.braintumorClassifier.config.configuration import ConfigurationManager
 from src.braintumorClassifier.components.prepare_callbacks import PrepareCallback1
 from src.braintumorClassifier.components.training import Training
 from src.braintumorClassifier import logger
@@ -10,7 +10,7 @@ class ModelTrainingPipeline:
         pass
     
     def main(self):
-        config = ConfigurationManager3()
+        config = ConfigurationManager()
         prepare_callback_config = config.get_prepare_callback_config()
         prepare_callbacks = PrepareCallback1(config=prepare_callback_config)
         callback_list = prepare_callbacks.get_tb_ckpt_callbacks()

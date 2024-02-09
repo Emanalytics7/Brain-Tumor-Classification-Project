@@ -3,7 +3,8 @@ from src.braintumorClassifier.utils.common import read_yaml, create_directories
 from src.braintumorClassifier.entity.config_entity import (DataIngestionConfig, 
                                                            PrepareBaseModelConfig,
                                                            PrepareCallbacksConfig, 
-                                                           TrainingConfig)
+                                                           TrainingConfig,
+                                                           EvaluationConfig)
 
 import os
 from pathlib import Path
@@ -28,12 +29,6 @@ class ConfigurationManager1:
             return data_ingestion_config
     
 
-class ConfigurationManager2:
-    def __init__(self, config_filepath = CONFIG_FILE_PATH, 
-                 params_filepath = PARAM_FILE_PATH):
-        self.config = read_yaml(config_filepath)
-        self.params = read_yaml(params_filepath)
-        create_directories([self.config.artifacts_root])
 
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
         config = self.config.prepare_base_model
@@ -54,12 +49,6 @@ class ConfigurationManager2:
         return prepare_base_model_config
     
 
-class ConfigurationManager3:
-    def __init__(self, config_filepath = CONFIG_FILE_PATH, 
-                 params_filepath = PARAM_FILE_PATH):
-        self.config = read_yaml(config_filepath)
-        self.params = read_yaml(params_filepath)
-        create_directories([self.config.artifacts_root])
 
     def get_prepare_callback_config(self) -> PrepareCallbacksConfig:
         config = self.config.prepare_callbacks
@@ -97,3 +86,18 @@ class ConfigurationManager3:
         )
         return training_config
         
+
+    
+    def get_validation_config(self) -> EvaluationConfig:
+          eval_config = EvaluationConfig(
+                path_of_model='artifacts/training/model.h5',
+                training_data='artifacts/data_ingestion/data',
+                all_params=self.params,
+                params_image_size=self.params.IMAGE_SIZE,
+                params_batch_size=self.params.BATCH_SIZE,
+          )
+          return eval_config
+          
+
+
+
