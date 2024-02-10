@@ -1,6 +1,6 @@
-from src.braintumorClassifier.constants import *
-from src.braintumorClassifier.utils.common import read_yaml, create_directories
-from src.braintumorClassifier.entity.config_entity import (DataIngestionConfig, 
+from braintumorClassifier.constants import *
+from braintumorClassifier.utils.common import read_yaml, create_directories
+from braintumorClassifier.entity.config_entity import (DataIngestionConfig, 
                                                            PrepareBaseModelConfig,
                                                            PrepareCallbacksConfig, 
                                                            TrainingConfig,
@@ -9,7 +9,7 @@ from src.braintumorClassifier.entity.config_entity import (DataIngestionConfig,
 import os
 from pathlib import Path
 
-class ConfigurationManager1:
+class ConfigurationManager:
     def __init__(self, config_filepath= CONFIG_FILE_PATH, params_filepath= PARAM_FILE_PATH):
         self.config = read_yaml(config_filepath)
         self.params = read_yaml(params_filepath)

@@ -1,6 +1,6 @@
-from src.braintumorClassifier.config.configuration import ConfigurationManager
-from src.braintumorClassifier.components.evaluation import Evaluation
-from src.braintumorClassifier import logger
+from braintumorClassifier.config.configuration import ConfigurationManager
+from braintumorClassifier.components.evaluation import Evaluation
+from braintumorClassifier import logger
 
 STAGE_NAME = 'Evaluation'
 
@@ -10,7 +10,7 @@ class EvaluationPipeline:
     
     def main(self):
         config = ConfigurationManager()
-        eval_config = config.get_evaluation_config()
+        eval_config = config.get_validation_config()
         eval = Evaluation(config=eval_config)
         eval.evaluation()
         eval.save_score()

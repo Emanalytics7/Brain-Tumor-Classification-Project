@@ -1,6 +1,6 @@
-from src.braintumorClassifier.config.configuration import ConfigurationManager
-from src.braintumorClassifier.components.prepare_base_model import PrepareBaseModel
-from src.braintumorClassifier import logger
+from braintumorClassifier.config.configuration import ConfigurationManager
+from braintumorClassifier.components.prepare_base_model import PrepareBaseModel
+from braintumorClassifier import logger
 
 STAGE_NAME = 'Prepare base model'
 

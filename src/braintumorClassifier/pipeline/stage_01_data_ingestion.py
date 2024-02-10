@@ -1,7 +1,7 @@
 # Pipeline
-from src.braintumorClassifier.config.configuration import ConfigurationManager
-from src.braintumorClassifier.components.data_ingestion import DataIngestion
-from src.braintumorClassifier import logger
+from braintumorClassifier.config.configuration import ConfigurationManager
+from braintumorClassifier.components.data_ingestion import DataIngestion
+from braintumorClassifier import logger
 
 STAGE_NAME = 'Data Ingestion stage'
 

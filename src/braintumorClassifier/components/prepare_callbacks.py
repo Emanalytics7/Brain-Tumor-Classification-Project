@@ -1,6 +1,4 @@
 import os
-import urllib.request as request
-from zipfile import ZipFile
 import tensorflow as tf
 from braintumorClassifier.entity.config_entity import PrepareCallbacksConfig
 import time

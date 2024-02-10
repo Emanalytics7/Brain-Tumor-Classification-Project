@@ -1,9 +1,8 @@
-import os
-import urllib.request as request
-from zipfile import ZipFile
 import tensorflow as tf
 from braintumorClassifier.entity.config_entity import TrainingConfig
 from pathlib import Path
+from keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
+
 
 class Training:
     def __init__(self, config: TrainingConfig):
@@ -18,25 +17,29 @@ class Training:
         datagenerator_kwargs = dict(
             rescale = 1./255,
             validation_split = 0.20
-
         )
 
         dataflow_kwargs = dict(
             target_size = self.config.params_image_size[:-1],
             batch_size = self.config.params_batch_size,
-            class_mode = 'bilinear'
+            class_mode = 'categorical'
         )
 
         valid_datagenerator = tf.keras.preprocessing.image.ImageDataGenerator(
             **datagenerator_kwargs
         )
 
-        self.train_valid_generator = valid_datagenerator.flow_from_directory(
+        self.valid_generator = valid_datagenerator.flow_from_directory(
             directory = self.config.training_data,
             subset = 'validation',
             shuffle = False,
             **dataflow_kwargs
         )
+
+       
+
+# Pass the learning rate scheduler to the list of callbacks
+        # callback_list.append(lr_scheduler)
 
         if self.config.params_is_augmentation:
             train_datagenerator = tf.keras.preprocessing.image.ImageDataGenerator(
@@ -50,18 +53,25 @@ class Training:
             )
         else:
             train_datagenerator = valid_datagenerator
-        self.train_generator = train_datagenerator.flow_from_directory(
-            directory = self.config.training_data,
-            subset = 'training',
-            shuffle = True,
-            **dataflow_kwargs
-            )
+        self.train_generator = train_datagenerator.flow_from_directory(directory = self.config.training_data,
+                                                                            subset = 'training', shuffle = True,
+                                                                            **dataflow_kwargs )
         
     @staticmethod
     def save_model(path: Path, model: tf.keras.Model):
         model.save(path)
 
     def train(self, callback_list: list):
+
+        callback_list = [
+            EarlyStopping(
+                monitor = 'val_loss', patience=10, verbose=1, restore_best_weights=True), 
+                ModelCheckpoint(
+                    filepath=str(self.config.trained_model_path),
+                    monitor = 'val_loss', save_best_only=True, verbose=1),
+                    ReduceLROnPlateau(
+                        monitor = 'val_loss', factor=0.1, patience=3, verbose=1, min_lr=1e-7)
+        ]
         self.step_per_epoch = self.train_generator.samples // self.train_generator.batch_size
         self.validation_steps = self.valid_generator.samples // self.valid_generator.batch_size
 

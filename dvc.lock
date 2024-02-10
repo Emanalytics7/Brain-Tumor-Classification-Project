@@ -1,0 +1,117 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/braintumorClassifier/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: b89107893f0b0036c9344dcdba9dc90d
+      size: 843
+    - path: src/braintumorClassifier/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: 8283d95a2449bb4f8454f81e131ed7f2
+      size: 934
+    outs:
+    - path: artifacts/data_ingestion/data
+      hash: md5
+      md5: 765b849a5ac16e0e9e3953225df9dd98.dir
+      size: 20121983
+      nfiles: 1041
+  prepare_base_model:
+    cmd: python src/braintumorClassifier/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: b89107893f0b0036c9344dcdba9dc90d
+      size: 843
+    - path: src/braintumorClassifier/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: 358539eb099643a1102041d1be4e508e
+      size: 986
+    params:
+      params.yaml:
+        CLASSES: 2
+        IMAGE_SIZE:
+        - 299
+        - 299
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: d3e3d8dec329e765e9cfd69693f729b1.dir
+      size: 177265248
+      nfiles: 2
+  training:
+    cmd: python src/braintumorClassifier/pipeline/stage_03_training.py
+    deps:
+    - path: artifacts/data_ingestion/data
+      hash: md5
+      md5: 765b849a5ac16e0e9e3953225df9dd98.dir
+      size: 20121983
+      nfiles: 1041
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: d3e3d8dec329e765e9cfd69693f729b1.dir
+      size: 177265248
+      nfiles: 2
+    - path: config/config.yaml
+      hash: md5
+      md5: b89107893f0b0036c9344dcdba9dc90d
+      size: 843
+    - path: src/braintumorClassifier/components/prepare_callbacks.py
+      hash: md5
+      md5: 74036f2ab14146e00225e5776b166c2f
+      size: 980
+    - path: src/braintumorClassifier/pipeline/stage_03_training.py
+      hash: md5
+      md5: 868d69d2f626057f6b2be62498a2bd66
+      size: 1242
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 10
+        IMAGE_SIZE:
+        - 299
+        - 299
+        - 3
+    outs:
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 16e8762453c672cc133cb5113e4f27f1
+      size: 91263008
+  evaluation:
+    cmd: python src/braintumorClassifier/pipeline/stage_04_evaluation.py
+    deps:
+    - path: artifacts/data_ingestion/data
+      hash: md5
+      md5: 765b849a5ac16e0e9e3953225df9dd98.dir
+      size: 20121983
+      nfiles: 1041
+    - path: artifacts/training/model.h5
+      hash: md5
+      md5: 16e8762453c672cc133cb5113e4f27f1
+      size: 91263008
+    - path: config/config.yaml
+      hash: md5
+      md5: b89107893f0b0036c9344dcdba9dc90d
+      size: 843
+    - path: src/braintumorClassifier/pipeline/stage_04_evaluation.py
+      hash: md5
+      md5: 1d3e2d2fccc76f1854d4e127057eb1b5
+      size: 868
+    params:
+      params.yaml:
+        BATCH_SIZE: 16
+        IMAGE_SIZE:
+        - 299
+        - 299
+        - 3
+    outs:
+    - path: scores.json
+      hash: md5
+      md5: 1cb165ad3f044d8ea8ae191a4f158c7a
+      size: 72

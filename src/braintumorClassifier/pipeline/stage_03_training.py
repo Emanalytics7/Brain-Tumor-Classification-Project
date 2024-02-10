@@ -1,7 +1,7 @@
-from src.braintumorClassifier.config.configuration import ConfigurationManager
-from src.braintumorClassifier.components.prepare_callbacks import PrepareCallback1
-from src.braintumorClassifier.components.training import Training
-from src.braintumorClassifier import logger
+from braintumorClassifier.config.configuration import ConfigurationManager
+from braintumorClassifier.components.prepare_callbacks import PrepareCallback1
+from braintumorClassifier.components.training import Training
+from braintumorClassifier import logger
 
 STAGE_NAME = 'Training'
 
@@ -19,7 +19,7 @@ class ModelTrainingPipeline:
         training = Training(config=training_config)
         training.get_base_model()
         training.train_valid_generator()
-        training.train_model(callback_list)
+        training.train(callback_list)
        
 if __name__ == '__main__':
     try: 

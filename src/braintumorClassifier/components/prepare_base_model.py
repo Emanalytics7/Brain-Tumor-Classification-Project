@@ -1,8 +1,6 @@
-import os
-import urllib.request as request
-from zipfile import ZipFile
+
 import tensorflow as tf
-from src.braintumorClassifier.entity.config_entity import PrepareBaseModelConfig
+from braintumorClassifier.entity.config_entity import PrepareBaseModelConfig
 from pathlib import Path
 
 class PrepareBaseModel:
@@ -10,7 +8,7 @@ class PrepareBaseModel:
         self.config = config
 
     def get_base_model(self):
-        self.model = tf.keras.applications.vgg16.VGG16(
+        self.model = tf.keras.applications.InceptionV3(
             input_shape = self.config.params_image_size,
             include_top = self.config.params_include_top,
             weights = self.config.params_weights
@@ -37,7 +35,7 @@ class PrepareBaseModel:
         )
 
         full_model.compile(
-            optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate),
+            optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate),
             loss = tf.keras.losses.CategoricalCrossentropy(),
             metrics = ['accuracy']
         )
