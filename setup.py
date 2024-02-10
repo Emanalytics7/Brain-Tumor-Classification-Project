@@ -12,7 +12,7 @@ __version__ ='0.0.0'
 REPO_NAME = 'braintumorClassifier'
 AUTHOR_USER_NAME = 'emanalytics'
 SRC_REPO = 'braintumorClassifier'
-AUTHOR_EMAIL = 'emannisar777@gmail.com'
+AUTHOR_EMAIL = '....'
 
 setuptools.setup(
     name=REPO_NAME,
