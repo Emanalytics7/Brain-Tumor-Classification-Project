@@ -34,7 +34,7 @@ https://github.com/entbappy/Chicken-Disease-Classification--Project
 ### STEP 01- Create a conda environment after opening the repository
 
 ```bash
-conda create -n cnncls python=3.8 -y
+conda create -n cnncls python=3.11 -y
 ```
 
 ```bash
