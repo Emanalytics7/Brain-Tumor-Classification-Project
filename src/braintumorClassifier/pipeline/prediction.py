@@ -25,8 +25,7 @@ class PredictionPipeline:
                 return [{'image': prediction}]
         except Exception as e:
             print(f"Error in prediction: {e}")
-            # Handle error appropriately, maybe log it or return a default error prediction
-            return {"error" : str(e)} # Consider
+            return {"error" : str(e)} 
 
 
 

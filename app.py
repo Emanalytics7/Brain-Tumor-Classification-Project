@@ -32,25 +32,6 @@ def trainRoute():
 
 @app.route("/predict", methods=['POST'])
 @cross_origin()
-# def predictRoute():
-    # try:
-    #     if 'image' not in request.files:
-    #         return jsonify({'error': 'No file part'}), 500
-    #     file = request.files['image']
-
-    #     if file.filename == '':
-    #         return jsonify({'error': 'No selected file'}), 500
-        
-    #     if file:
-    #         filepath = os.path.join('/tmp',  'uploaded_image.jpg')
-    #         file.save(filepath)
-
-    #         result = clApp.predict(filepath)
-    #         return jsonify(result)
-    # except Exception as e:
-    #     app.logger.error(f'Unexpected error: {e}')
-
-    #     return jsonify({'error': str(e)}), 500
 def predictRoute():
     image = request.json['image']
     decodeImage(image, clApp.filename)
