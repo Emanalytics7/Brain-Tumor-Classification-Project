@@ -29,16 +29,16 @@ The Brain Tumor Classification Project is designed to leverage machine learning 
 Clone the repository
 
 ```bash
-https://github.com/entbappy/Chicken-Disease-Classification--Project
+https://github.com/Emanalytics7/Brain-Tumor-Classification-Project.git
 ```
 ### STEP 01- Create a conda environment after opening the repository
 
 ```bash
-conda create -n cnncls python=3.11 -y
+conda create -n environment-name python=3.11 -y
 ```
 
 ```bash
-conda activate cnncls
+conda activate environment-name
 ```
 
 
