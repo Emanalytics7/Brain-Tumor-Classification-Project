@@ -1,7 +1,7 @@
-# Brain Tumor Classification Project
+# Brain Tumor Classification MLOPs-Project
 
 ## Overview
-The Brain Tumor Classification Project is designed to leverage machine learning for the automated classification of brain tumors from MRI images, aiming to enhance diagnostic accuracy and efficiency. This project employs advanced algorithms to process and analyze imaging data, providing a crucial tool for medical professionals in the early detection and categorization tumor.
+The Brain Tumor Classification Project is designed to leverage machine learning for the automated classification of brain tumors from MRI images, aiming to enhance diagnostic accuracy and efficiency. By integrating MLOps practices, I aimed to streamline the development, deployment, and maintenance of machine learning models in a production environment.
 
 
 ## Features
